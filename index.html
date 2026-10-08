@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julio Camacho | Técnico Superior en Química Industrial</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f6fa;
+            color: #263445;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           CABECERA
+        ========================= */
+
+        header {
+            background: #102b46;
+            color: white;
+            text-align: center;
+            padding: 45px 20px 35px;
+        }
+
+        .foto-perfil {
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 19px;
+            color: #d5e4f2;
+        }
+
+        /* =========================
+           MENÚ
+        ========================= */
+
+        nav {
+            background: #0b2136;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+        }
+
+        nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            padding: 9px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            background: #1769aa;
+        }
+
+        /* =========================
+           CONTENEDOR
+        ========================= */
+
+        .contenedor {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: #174c75;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e1eaf2;
+            padding-bottom: 8px;
+        }
+
+        /* =========================
+           PÁGINA DE CERTIFICADOS
+        ========================= */
+
+        #paginaCertificados {
+            display: none;
+        }
+
+        .ruta {
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .ruta a {
+            color: #1769aa;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .ruta span {
+            margin: 0 8px;
+            color: #8a98a8;
+        }
+
+        /* =========================
+           TARJETAS CERTIFICADOS
+        ========================= */
+
+        .certificado {
+            border: 1px solid #dfe6ee;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: white;
+        }
+
+        .certificado:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: #1769aa;
+        }
+
+        .certificado h3 {
+            color: #174c75;
+            margin: 0;
+        }
+
+        .certificado p {
+            color: #637386;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           VENTANA DEL CERTIFICADO
+        ========================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(10, 25, 40, 0.72);
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .modal-contenido {
+            background: white;
+            width: 80%;
+            max-width: 850px;
+            max-height: 90vh;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e1e6eb;
+        }
+
+        .modal-cabecera h3 {
+            color: #174c75;
+        }
+
+        .acciones-modal {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .abrir-nueva {
+            background: #1769aa;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .abrir-nueva:hover {
+            background: #104c7d;
+        }
+
+        .cerrar {
+            border: none;
+            background: transparent;
+            font-size: 27px;
+            color: #637386;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 6px;
+        }
+
+        .cerrar:hover {
+            color: #102b46;
+        }
+
+        .modal-documento {
+            padding: 20px;
+            overflow: auto;
+            text-align: center;
+            background: #f3f6fa;
+        }
+
+        .modal-documento img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        .boton {
+            display: inline-block;
+            background: #1769aa;
+            color: white;
+            padding: 9px 17px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .boton:hover {
+            background: #104c7d;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #637386;
+        }
+
+        /* =========================
+           MÓVIL
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 35px 15px 30px;
+            }
+
+            .foto-perfil {
+                width: 120px;
+                height: 120px;
+            }
+
+            header h1 {
+                font-size: 29px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            nav button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-contenido {
+                width: 96%;
+                max-height: 94vh;
+            }
+
+            .modal-cabecera {
+                padding: 12px;
+            }
+
+            .abrir-nueva {
+                font-size: 12px;
+                padding: 7px 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         CABECERA
+    ========================= -->
+
+    <header>
+
+        <!-- Sustituiremos esta imagen por tu fotografía -->
+        <img
+            class="foto-perfil"
+            src="foto.jpg"
+            alt="Fotografía de Julio Camacho"
+        >
+
+        <h1>Julio Camacho</h1>
+
+        <p>Técnico Superior en Química Industrial</p>
+
+        <p>Perfil profesional · Formación · Certificados</p>
+
+    </header>
+
+
+    <!-- =========================
+         MENÚ
+    ========================= -->
+
+    <nav>
+        <button onclick="mostrarInicio()">CV</button>
+        <button onclick="mostrarCertificados()">Certificados</button>
+    </nav>
+
+
+    <!-- =========================
+         PÁGINA PRINCIPAL / CV
+    ========================= -->
+
+    <main id="paginaInicio" class="contenedor">
+
+        <section>
+            <h2>Sobre mí</h2>
+
+            <p>
+                Técnico Superior en Química Industrial interesado en seguir
+                desarrollándome profesionalmente en el sector industrial.
+                En esta página se recoge mi formación, experiencia y
+                certificados profesionales.
+            </p>
+        </section>
+
+
+        <section>
+            <h2>Formación académica</h2>
+
+            <div class="certificado">
+                <h3>Técnico Superior en Química Industrial</h3>
+
+                <p>
+                    Titulación de formación profesional superior.
+                </p>
+            </div>
+        </section>
+
+
+        <section>
+            <h2>Experiencia profesional</h2>
+
+            <p>
+                En este apartado incorporaremos tu experiencia laboral,
+                las funciones realizadas y los conocimientos adquiridos.
+            </p>
+        </section>
+
+
+        <section>
+            <h2>Contacto</h2>
+
+            <p>
+                Para información profesional o posibles oportunidades
+                laborales, puedes contactar conmigo.
+            </p>
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PÁGINA DE CERTIFICADOS
+    ========================= -->
+
+    <main id="paginaCertificados" class="contenedor">
+
+        <!-- Ruta de navegación -->
+
+        <div class="ruta">
+            <a onclick="mostrarInicio()">Home</a>
+            <span>/</span>
+            <strong>Certificados</strong>
+        </div>
+
+
+        <section>
+
+            <h2>Certificados y cursos</h2>
+
+            <p>
+                Aquí puedes consultar mis certificados de formación
+                complementaria.
+            </p>
+
+
+            <!-- PRIMER CERTIFICADO -->
+
+            <div
+                class="certificado"
+                onclick="abrirCertificado(
+                    'Certificado de curso',
+                    'certificado1.jpg'
+                )"
+            >
+
+                <h3>Certificado de curso</h3>
+
+                <p>
+                    Pulsa para consultar el certificado.
+                </p>
+
+            </div>
+
+
+            <!-- AQUÍ AÑADIREMOS LOS SIGUIENTES CERTIFICADOS -->
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         VENTANA EMERGENTE
+    ========================= -->
+
+    <div id="modalCertificado" class="modal">
+
+        <div class="modal-contenido">
+
+            <div class="modal-cabecera">
+
+                <h3 id="tituloCertificado">
+                    Certificado
+                </h3>
+
+                <div class="acciones-modal">
+
+                    <a
+                        id="abrirNueva"
+                        class="abrir-nueva"
+                        href="#"
+                        target="_blank"
+                    >
+                        ↗ Abrir en nueva pestaña
+                    </a>
+
+                    <button
+                        class="cerrar"
+                        onclick="cerrarCertificado()"
+                        aria-label="Cerrar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-documento">
+
+                <img
+                    id="imagenCertificado"
+                    src=""
+                    alt="Certificado"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+        © 2026 Julio Camacho · Portfolio profesional
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function mostrarInicio() {
+
+            document.getElementById("paginaInicio").style.display = "block";
+
+            document.getElementById("paginaCertificados").style.display = "none";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        function mostrarCertificados() {
+
+            document.getElementById("paginaInicio").style.display = "none";
+
+            document.getElementById("paginaCertificados").style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        function abrirCertificado(titulo, archivo) {
+
+            document.getElementById("tituloCertificado").textContent = titulo;
+
+            document.getElementById("imagenCertificado").src = archivo;
+
+            document.getElementById("abrirNueva").href = archivo;
+
+            document.getElementById("modalCertificado").style.display = "flex";
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        function cerrarCertificado() {
+
+            document.getElementById("modalCertificado").style.display = "none";
+
+            document.body.style.overflow = "auto";
+        }
+
+
+        /* Cerrar también pulsando fuera de la ventana */
+
+        document.getElementById("modalCertificado").addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === this) {
+                    cerrarCertificado();
+                }
+
+            }
+        );
+
+
+        /* Cerrar pulsando ESC */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+                    cerrarCertificado();
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
