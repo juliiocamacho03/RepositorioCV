@@ -3,320 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julio Camacho | Técnico Superior en Química Industrial</title>
+    <title>Julio Camacho | Portfolio Profesional</title>
 
     <style>
+        :root {
+            --azul: #163b65;
+            --azul-claro: #eaf1f8;
+            --fondo: #f5f7fa;
+            --blanco: #ffffff;
+            --texto: #263445;
+            --gris: #66758a;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f3f6fa;
-            color: #263445;
-            line-height: 1.7;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            min-height: 100vh;
         }
 
-        /* =========================
-           CABECERA
-        ========================= */
+        button, a {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
 
         header {
-            background: #102b46;
-            color: white;
-            text-align: center;
-            padding: 45px 20px 35px;
+            width: 100%;
+            padding: 28px 7%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 14px;
         }
 
-        .foto-perfil {
-            width: 145px;
-            height: 145px;
+        .nav-button {
+            border: 1px solid var(--azul);
+            border-radius: 30px;
+            padding: 12px 27px;
+            background: transparent;
+            color: var(--azul);
+            font-weight: bold;
+            transition: 0.25s;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: var(--azul);
+            color: white;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 35px 24px 70px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: aparecer 0.35s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PÁGINA PRINCIPAL */
+
+        .home {
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 290px;
+            height: 290px;
+            max-width: 75vw;
+            max-height: 75vw;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
+            object-position: center;
+            border: 7px solid white;
+            box-shadow: 0 8px 28px rgba(22, 59, 101, 0.13);
+            background: var(--azul-claro);
+        }
+
+        .qualification {
+            margin-top: 25px;
+            color: var(--azul);
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .about {
+            max-width: 650px;
+            margin: 48px auto 0;
+            text-align: left;
+        }
+
+        .about h2 {
+            color: var(--azul);
+            font-size: 21px;
+            letter-spacing: 3px;
             margin-bottom: 20px;
         }
 
-        header h1 {
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 19px;
-            color: #d5e4f2;
-        }
-
-        /* =========================
-           MENÚ
-        ========================= */
-
-        nav {
-            background: #0b2136;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 20px;
-        }
-
-        nav button {
-            background: transparent;
-            border: none;
-            color: white;
+        .about p {
             font-size: 16px;
-            padding: 9px 18px;
-            border-radius: 6px;
-            cursor: pointer;
+            line-height: 1.9;
+            color: var(--gris);
+            margin-bottom: 14px;
         }
 
-        nav button:hover {
-            background: #1769aa;
-        }
-
-        /* =========================
-           CONTENEDOR
-        ========================= */
-
-        .contenedor {
-            max-width: 900px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            background: white;
-            padding: 28px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: #174c75;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e1eaf2;
-            padding-bottom: 8px;
-        }
-
-        /* =========================
-           PÁGINA DE CERTIFICADOS
-        ========================= */
-
-        #paginaCertificados {
-            display: none;
-        }
-
-        .ruta {
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-
-        .ruta a {
-            color: #1769aa;
+        .linkedin-button {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 13px 25px;
+            border-radius: 30px;
+            background: var(--azul);
+            color: white;
             text-decoration: none;
             font-weight: bold;
-            cursor: pointer;
+            transition: 0.25s;
         }
 
-        .ruta span {
-            margin: 0 8px;
-            color: #8a98a8;
-        }
-
-        /* =========================
-           TARJETAS CERTIFICADOS
-        ========================= */
-
-        .certificado {
-            border: 1px solid #dfe6ee;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-            background: white;
-        }
-
-        .certificado:hover {
+        .linkedin-button:hover {
+            background: #24578c;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-color: #1769aa;
         }
 
-        .certificado h3 {
-            color: #174c75;
-            margin: 0;
+        /* APARTADOS */
+
+        .section-heading {
+            color: var(--azul);
+            font-size: 30px;
+            margin-bottom: 12px;
         }
 
-        .certificado p {
-            color: #637386;
-            margin-top: 5px;
+        .section-description {
+            color: var(--gris);
+            line-height: 1.7;
+            margin-bottom: 28px;
         }
 
-        /* =========================
-           VENTANA DEL CERTIFICADO
-        ========================= */
+        .home-button {
+            display: inline-block;
+            border: none;
+            background: var(--azul-claro);
+            color: var(--azul);
+            padding: 11px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            inset: 0;
-            background: rgba(10, 25, 40, 0.72);
+        .home-button:hover {
+            background: #d9e6f4;
+        }
+
+        /* TARJETAS */
+
+        .certificate-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .certificate-card {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+            padding: 22px;
+            background: white;
+            border: 1px solid #dce4ed;
+            border-radius: 17px;
+            color: var(--texto);
+            box-shadow: 0 3px 12px rgba(22, 59, 101, 0.04);
+            transition: 0.25s;
+        }
+
+        .certificate-card:hover {
+            border-color: var(--azul);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(22, 59, 101, 0.09);
+        }
+
+        .document-icon {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 25px;
+            border-radius: 12px;
+            background: var(--azul-claro);
+            color: var(--azul);
+            font-size: 23px;
         }
 
-        .modal-contenido {
-            background: white;
-            width: 80%;
-            max-width: 850px;
-            max-height: 90vh;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            position: relative;
+        .certificate-name {
+            flex: 1;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .open-icon {
+            color: var(--azul);
+            font-size: 21px;
+        }
+
+        /* VENTANA DE DOCUMENTOS */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(12, 25, 41, 0.68);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .modal-window {
             display: flex;
             flex-direction: column;
+            width: 100%;
+            max-width: 950px;
+            height: 85vh;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
         }
 
-        .modal-cabecera {
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e1e6eb;
+            gap: 15px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e4e9ef;
         }
 
-        .modal-cabecera h3 {
-            color: #174c75;
+        .modal-title {
+            font-weight: bold;
+            color: var(--azul);
+            line-height: 1.4;
         }
 
-        .acciones-modal {
+        .modal-actions {
             display: flex;
-            gap: 8px;
             align-items: center;
+            gap: 12px;
         }
 
-        .abrir-nueva {
-            background: #1769aa;
+        .new-tab-button {
+            background: var(--azul);
             color: white;
             text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
-        .abrir-nueva:hover {
-            background: #104c7d;
-        }
-
-        .cerrar {
+        .close-button {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
             border: none;
-            background: transparent;
-            font-size: 27px;
-            color: #637386;
-            cursor: pointer;
+            border-radius: 50%;
+            background: #edf1f5;
+            color: var(--texto);
+            font-size: 25px;
             line-height: 1;
-            padding: 2px 6px;
         }
 
-        .cerrar:hover {
-            color: #102b46;
+        .close-button:hover {
+            background: #dce4ed;
         }
 
-        .modal-documento {
-            padding: 20px;
-            overflow: auto;
-            text-align: center;
-            background: #f3f6fa;
+        .pdf-viewer {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: #edf1f5;
         }
 
-        .modal-documento img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-        }
+        /* MÓVILES */
 
-        /* =========================
-           BOTÓN
-        ========================= */
-
-        .boton {
-            display: inline-block;
-            background: #1769aa;
-            color: white;
-            padding: 9px 17px;
-            margin-top: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .boton:hover {
-            background: #104c7d;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #637386;
-        }
-
-        /* =========================
-           MÓVIL
-        ========================= */
-
-        @media (max-width: 600px) {
-
+        @media (max-width: 650px) {
             header {
-                padding: 35px 15px 30px;
+                justify-content: center;
+                padding: 22px 12px;
             }
 
-            .foto-perfil {
-                width: 120px;
-                height: 120px;
+            .nav-button {
+                padding: 11px 22px;
             }
 
-            header h1 {
-                font-size: 29px;
+            main {
+                padding: 25px 18px 50px;
             }
 
-            header p {
-                font-size: 16px;
+            .profile-photo {
+                width: 235px;
+                height: 235px;
             }
 
-            nav button {
-                font-size: 14px;
-                padding: 8px 12px;
+            .qualification {
+                font-size: 18px;
+                line-height: 1.6;
             }
 
-            section {
-                padding: 20px;
+            .about {
+                margin-top: 38px;
+            }
+
+            .certificate-list {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate-card {
+                padding: 17px;
             }
 
             .modal {
                 padding: 10px;
             }
 
-            .modal-contenido {
-                width: 96%;
-                max-height: 94vh;
+            .modal-window {
+                height: 88vh;
+                border-radius: 13px;
             }
 
-            .modal-cabecera {
+            .modal-header {
                 padding: 12px;
+                gap: 8px;
             }
 
-            .abrir-nueva {
-                font-size: 12px;
-                padding: 7px 9px;
+            .modal-actions {
+                gap: 7px;
+            }
+
+            .new-tab-button {
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+
+            .close-button {
+                width: 33px;
+                height: 33px;
+            }
+
+            .section-heading {
+                font-size: 26px;
             }
         }
     </style>
@@ -324,172 +394,189 @@
 
 <body>
 
-    <!-- =========================
-         CABECERA
-    ========================= -->
+    <!-- MENÚ SUPERIOR -->
 
     <header>
-
-        <!-- Sustituiremos esta imagen por tu fotografía -->
-        <img
-            class="foto-perfil"
-            src="foto.jpg"
-            alt="Fotografía de Julio Camacho"
-        >
-
-        <h1>Julio Camacho</h1>
-
-        <p>Técnico Superior en Química Industrial</p>
-
-        <p>Perfil profesional · Formación · Certificados</p>
-
+        <button class="nav-button" data-page="cv">CV</button>
+        <button class="nav-button" data-page="certificados">
+            Certificados
+        </button>
     </header>
 
+    <main>
 
-    <!-- =========================
-         MENÚ
-    ========================= -->
+        <!-- INICIO -->
 
-    <nav>
-        <button onclick="mostrarInicio()">CV</button>
-        <button onclick="mostrarCertificados()">Certificados</button>
-    </nav>
+        <section id="inicio" class="page active home">
 
-
-    <!-- =========================
-         PÁGINA PRINCIPAL / CV
-    ========================= -->
-
-    <main id="paginaInicio" class="contenedor">
-
-        <section>
-            <h2>Sobre mí</h2>
-
-            <p>
-                Técnico Superior en Química Industrial interesado en seguir
-                desarrollándome profesionalmente en el sector industrial.
-                En esta página se recoge mi formación, experiencia y
-                certificados profesionales.
-            </p>
-        </section>
-
-
-        <section>
-            <h2>Formación académica</h2>
-
-            <div class="certificado">
-                <h3>Técnico Superior en Química Industrial</h3>
-
-                <p>
-                    Titulación de formación profesional superior.
-                </p>
-            </div>
-        </section>
-
-
-        <section>
-            <h2>Experiencia profesional</h2>
-
-            <p>
-                En este apartado incorporaremos tu experiencia laboral,
-                las funciones realizadas y los conocimientos adquiridos.
-            </p>
-        </section>
-
-
-        <section>
-            <h2>Contacto</h2>
-
-            <p>
-                Para información profesional o posibles oportunidades
-                laborales, puedes contactar conmigo.
-            </p>
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         PÁGINA DE CERTIFICADOS
-    ========================= -->
-
-    <main id="paginaCertificados" class="contenedor">
-
-        <!-- Ruta de navegación -->
-
-        <div class="ruta">
-            <a onclick="mostrarInicio()">Home</a>
-            <span>/</span>
-            <strong>Certificados</strong>
-        </div>
-
-
-        <section>
-
-            <h2>Certificados y cursos</h2>
-
-            <p>
-                Aquí puedes consultar mis certificados de formación
-                complementaria.
-            </p>
-
-
-            <!-- PRIMER CERTIFICADO -->
-
-            <div
-                class="certificado"
-                onclick="abrirCertificado(
-                    'Certificado de curso',
-                    'certificado1.jpg'
-                )"
+            <img
+                src="foto.jpeg"
+                alt="Fotografía de perfil"
+                class="profile-photo"
             >
 
-                <h3>Certificado de curso</h3>
+            <h1 class="qualification">
+                Técnico Superior en Química Industrial
+            </h1>
+
+            <div class="about">
+
+                <h2>ABOUT ME</h2>
 
                 <p>
-                    Pulsa para consultar el certificado.
+                    Soy una persona responsable, proactiva y comprometida
+                    con mi trabajo. Estoy motivado por el aprendizaje
+                    continuo, tengo buena capacidad de adaptación,
+                    trabajo en equipo y organización, y estoy enfocado
+                    en crecer personal y profesionalmente.
                 </p>
+
+                <a
+                    href="https://www.linkedin.com/in/julio-camacho-a04464346"
+                    class="linkedin-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Mi perfil de LinkedIn ↗
+                </a>
 
             </div>
 
+        </section>
 
-            <!-- AQUÍ AÑADIREMOS LOS SIGUIENTES CERTIFICADOS -->
+        <!-- CV -->
 
+        <section id="cv" class="page">
+
+            <button class="home-button" data-page="inicio">
+                ← Home
+            </button>
+
+            <h1 class="section-heading">Currículum Vitae</h1>
+
+            <p class="section-description">
+                Consulta mi currículum profesional.
+            </p>
+
+            <button
+                class="certificate-card"
+                onclick="abrirDocumento('CV.pdf', 'Currículum Vitae')"
+            >
+                <span class="document-icon">📄</span>
+
+                <span class="certificate-name">
+                    Consultar mi CV
+                </span>
+
+                <span class="open-icon">↗</span>
+            </button>
+
+        </section>
+
+        <!-- CERTIFICADOS -->
+
+        <section id="certificados" class="page">
+
+            <button class="home-button" data-page="inicio">
+                ← Home
+            </button>
+
+            <h1 class="section-heading">Mis certificados</h1>
+
+            <p class="section-description">
+                Consulta los cursos y las acreditaciones que forman
+                parte de mi formación profesional.
+            </p>
+
+            <div class="certificate-list">
+
+                <button
+                    class="certificate-card"
+                    onclick="abrirDocumento(
+                        'certificados/certificado-1.pdf',
+                        'Nombre del primer curso'
+                    )"
+                >
+                    <span class="document-icon">📄</span>
+                    <span class="certificate-name">
+                        Nombre del primer curso
+                    </span>
+                    <span class="open-icon">↗</span>
+                </button>
+
+                <button
+                    class="certificate-card"
+                    onclick="abrirDocumento(
+                        'certificados/certificado-2.pdf',
+                        'Nombre del segundo curso'
+                    )"
+                >
+                    <span class="document-icon">📄</span>
+                    <span class="certificate-name">
+                        Nombre del segundo curso
+                    </span>
+                    <span class="open-icon">↗</span>
+                </button>
+
+                <button
+                    class="certificate-card"
+                    onclick="abrirDocumento(
+                        'certificados/certificado-3.pdf',
+                        'Nombre del tercer curso'
+                    )"
+                >
+                    <span class="document-icon">📄</span>
+                    <span class="certificate-name">
+                        Nombre del tercer curso
+                    </span>
+                    <span class="open-icon">↗</span>
+                </button>
+
+            </div>
 
         </section>
 
     </main>
 
+    <footer>
+        Portfolio profesional
+    </footer>
 
-    <!-- =========================
-         VENTANA EMERGENTE
-    ========================= -->
+    <!-- VENTANA SUPERPUESTA -->
 
-    <div id="modalCertificado" class="modal">
+    <div
+        class="modal"
+        id="document-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-hidden="true"
+    >
 
-        <div class="modal-contenido">
+        <div class="modal-window">
 
-            <div class="modal-cabecera">
+            <div class="modal-header">
 
-                <h3 id="tituloCertificado">
-                    Certificado
-                </h3>
+                <h2 class="modal-title" id="modal-title">
+                    Documento
+                </h2>
 
-                <div class="acciones-modal">
+                <div class="modal-actions">
 
                     <a
-                        id="abrirNueva"
-                        class="abrir-nueva"
                         href="#"
+                        id="new-tab-link"
+                        class="new-tab-button"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
-                        ↗ Abrir en nueva pestaña
+                        Abrir en otra pestaña ↗
                     </a>
 
                     <button
-                        class="cerrar"
-                        onclick="cerrarCertificado()"
-                        aria-label="Cerrar"
+                        class="close-button"
+                        id="close-modal"
+                        aria-label="Cerrar documento"
                     >
                         ×
                     </button>
@@ -498,42 +585,36 @@
 
             </div>
 
-
-            <div class="modal-documento">
-
-                <img
-                    id="imagenCertificado"
-                    src=""
-                    alt="Certificado"
-                >
-
-            </div>
+            <iframe
+                class="pdf-viewer"
+                id="pdf-viewer"
+                title="Vista previa del documento"
+            ></iframe>
 
         </div>
 
     </div>
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer>
-        © 2026 Julio Camacho · Portfolio profesional
-    </footer>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
+        // NAVEGACIÓN ENTRE APARTADOS
 
-        function mostrarInicio() {
+        const paginas = document.querySelectorAll(".page");
+        const botonesMenu = document.querySelectorAll("[data-page]");
 
-            document.getElementById("paginaInicio").style.display = "block";
+        function mostrarPagina(nombre) {
 
-            document.getElementById("paginaCertificados").style.display = "none";
+            paginas.forEach(function(pagina) {
+                pagina.classList.remove("active");
+            });
+
+            document.getElementById(nombre).classList.add("active");
+
+            botonesMenu.forEach(function(boton) {
+                boton.classList.toggle(
+                    "active",
+                    boton.dataset.page === nombre
+                );
+            });
 
             window.scrollTo({
                 top: 0,
@@ -541,69 +622,72 @@
             });
         }
 
-
-        function mostrarCertificados() {
-
-            document.getElementById("paginaInicio").style.display = "none";
-
-            document.getElementById("paginaCertificados").style.display = "block";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
+        botonesMenu.forEach(function(boton) {
+            boton.addEventListener("click", function() {
+                mostrarPagina(boton.dataset.page);
             });
-        }
+        });
 
 
-        function abrirCertificado(titulo, archivo) {
+        // VENTANA PARA ABRIR LOS PDF
 
-            document.getElementById("tituloCertificado").textContent = titulo;
+        const modal = document.getElementById("document-modal");
+        const modalTitle = document.getElementById("modal-title");
+        const pdfViewer = document.getElementById("pdf-viewer");
+        const newTabLink = document.getElementById("new-tab-link");
+        const closeModalButton = document.getElementById("close-modal");
 
-            document.getElementById("imagenCertificado").src = archivo;
+        let elementoAnterior = null;
 
-            document.getElementById("abrirNueva").href = archivo;
+        function abrirDocumento(ruta, titulo) {
 
-            document.getElementById("modalCertificado").style.display = "flex";
+            elementoAnterior = document.activeElement;
+
+            modalTitle.textContent = titulo;
+            newTabLink.href = ruta;
+            pdfViewer.src = ruta;
+
+            modal.classList.add("visible");
+            modal.setAttribute("aria-hidden", "false");
 
             document.body.style.overflow = "hidden";
+
+            closeModalButton.focus();
         }
 
+        function cerrarDocumento() {
 
-        function cerrarCertificado() {
+            modal.classList.remove("visible");
+            modal.setAttribute("aria-hidden", "true");
 
-            document.getElementById("modalCertificado").style.display = "none";
+            pdfViewer.src = "about:blank";
 
-            document.body.style.overflow = "auto";
+            document.body.style.overflow = "";
+
+            if (elementoAnterior) {
+                elementoAnterior.focus();
+            }
         }
 
-
-        /* Cerrar también pulsando fuera de la ventana */
-
-        document.getElementById("modalCertificado").addEventListener(
+        closeModalButton.addEventListener(
             "click",
-            function(event) {
-
-                if (event.target === this) {
-                    cerrarCertificado();
-                }
-
-            }
+            cerrarDocumento
         );
 
-
-        /* Cerrar pulsando ESC */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (event.key === "Escape") {
-                    cerrarCertificado();
-                }
-
+        modal.addEventListener("click", function(evento) {
+            if (evento.target === modal) {
+                cerrarDocumento();
             }
-        );
+        });
 
+        document.addEventListener("keydown", function(evento) {
+            if (
+                evento.key === "Escape" &&
+                modal.classList.contains("visible")
+            ) {
+                cerrarDocumento();
+            }
+        });
     </script>
 
 </body>
