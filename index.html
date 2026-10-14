@@ -1,694 +1,271 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julio Camacho | Portfolio Profesional</title>
-
-    <style>
-        :root {
-            --azul: #163b65;
-            --azul-claro: #eaf1f8;
-            --fondo: #f5f7fa;
-            --blanco: #ffffff;
-            --texto: #263445;
-            --gris: #66758a;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--fondo);
-            color: var(--texto);
-            min-height: 100vh;
-        }
-
-        button, a {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        header {
-            width: 100%;
-            padding: 28px 7%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .nav-button {
-            border: 1px solid var(--azul);
-            border-radius: 30px;
-            padding: 12px 27px;
-            background: transparent;
-            color: var(--azul);
-            font-weight: bold;
-            transition: 0.25s;
-        }
-
-        .nav-button:hover,
-        .nav-button.active {
-            background: var(--azul);
-            color: white;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 35px 24px 70px;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: aparecer 0.35s ease;
-        }
-
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* PÁGINA PRINCIPAL */
-
-        .home {
-            text-align: center;
-        }
-
-        .profile-photo {
-            width: 290px;
-            height: 290px;
-            max-width: 75vw;
-            max-height: 75vw;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-            border: 7px solid white;
-            box-shadow: 0 8px 28px rgba(22, 59, 101, 0.13);
-            background: var(--azul-claro);
-        }
-
-        .qualification {
-            margin-top: 25px;
-            color: var(--azul);
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .about {
-            max-width: 650px;
-            margin: 48px auto 0;
-            text-align: left;
-        }
-
-        .about h2 {
-            color: var(--azul);
-            font-size: 21px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .about p {
-            font-size: 16px;
-            line-height: 1.9;
-            color: var(--gris);
-            margin-bottom: 14px;
-        }
-
-        .linkedin-button {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 13px 25px;
-            border-radius: 30px;
-            background: var(--azul);
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.25s;
-        }
-
-        .linkedin-button:hover {
-            background: #24578c;
-            transform: translateY(-2px);
-        }
-
-        /* APARTADOS */
-
-        .section-heading {
-            color: var(--azul);
-            font-size: 30px;
-            margin-bottom: 12px;
-        }
-
-        .section-description {
-            color: var(--gris);
-            line-height: 1.7;
-            margin-bottom: 28px;
-        }
-
-        .home-button {
-            display: inline-block;
-            border: none;
-            background: var(--azul-claro);
-            color: var(--azul);
-            padding: 11px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        .home-button:hover {
-            background: #d9e6f4;
-        }
-
-        /* TARJETAS */
-
-        .certificate-list {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        .certificate-card {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-align: left;
-            padding: 22px;
-            background: white;
-            border: 1px solid #dce4ed;
-            border-radius: 17px;
-            color: var(--texto);
-            box-shadow: 0 3px 12px rgba(22, 59, 101, 0.04);
-            transition: 0.25s;
-        }
-
-        .certificate-card:hover {
-            border-color: var(--azul);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(22, 59, 101, 0.09);
-        }
-
-        .document-icon {
-            width: 45px;
-            height: 45px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: var(--azul-claro);
-            color: var(--azul);
-            font-size: 23px;
-        }
-
-        .certificate-name {
-            flex: 1;
-            font-weight: bold;
-            line-height: 1.5;
-        }
-
-        .open-icon {
-            color: var(--azul);
-            font-size: 21px;
-        }
-
-        /* VENTANA DE DOCUMENTOS */
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            background: rgba(12, 25, 41, 0.68);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal.visible {
-            display: flex;
-        }
-
-        .modal-window {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 950px;
-            height: 85vh;
-            background: white;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            padding: 16px 20px;
-            border-bottom: 1px solid #e4e9ef;
-        }
-
-        .modal-title {
-            font-weight: bold;
-            color: var(--azul);
-            line-height: 1.4;
-        }
-
-        .modal-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .new-tab-button {
-            background: var(--azul);
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .close-button {
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-            border: none;
-            border-radius: 50%;
-            background: #edf1f5;
-            color: var(--texto);
-            font-size: 25px;
-            line-height: 1;
-        }
-
-        .close-button:hover {
-            background: #dce4ed;
-        }
-
-        .pdf-viewer {
-            flex: 1;
-            width: 100%;
-            border: none;
-            background: #edf1f5;
-        }
-
-        /* MÓVILES */
-
-        @media (max-width: 650px) {
-            header {
-                justify-content: center;
-                padding: 22px 12px;
-            }
-
-            .nav-button {
-                padding: 11px 22px;
-            }
-
-            main {
-                padding: 25px 18px 50px;
-            }
-
-            .profile-photo {
-                width: 235px;
-                height: 235px;
-            }
-
-            .qualification {
-                font-size: 18px;
-                line-height: 1.6;
-            }
-
-            .about {
-                margin-top: 38px;
-            }
-
-            .certificate-list {
-                grid-template-columns: 1fr;
-            }
-
-            .certificate-card {
-                padding: 17px;
-            }
-
-            .modal {
-                padding: 10px;
-            }
-
-            .modal-window {
-                height: 88vh;
-                border-radius: 13px;
-            }
-
-            .modal-header {
-                padding: 12px;
-                gap: 8px;
-            }
-
-            .modal-actions {
-                gap: 7px;
-            }
-
-            .new-tab-button {
-                padding: 9px 10px;
-                font-size: 11px;
-            }
-
-            .close-button {
-                width: 33px;
-                height: 33px;
-            }
-
-            .section-heading {
-                font-size: 26px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- MENÚ SUPERIOR -->
-
-    <header>
-        <button class="nav-button" data-page="cv">CV</button>
-        <button class="nav-button" data-page="certificados">
-            Certificados
-        </button>
-    </header>
-
-    <main>
-
-        <!-- INICIO -->
-
-        <section id="inicio" class="page active home">
-
-            <img
-                src="foto.jpeg"
-                alt="Fotografía de perfil"
-                class="profile-photo"
-            >
-
-            <h1 class="qualification">
-                Técnico Superior en Química Industrial
-            </h1>
-
-            <div class="about">
-
-                <h2>ABOUT ME</h2>
-
-                <p>
-                    Soy una persona responsable, proactiva y comprometida
-                    con mi trabajo. Estoy motivado por el aprendizaje
-                    continuo, tengo buena capacidad de adaptación,
-                    trabajo en equipo y organización, y estoy enfocado
-                    en crecer personal y profesionalmente.
-                </p>
-
-                <a
-                    href="https://www.linkedin.com/in/julio-camacho-a04464346"
-                    class="linkedin-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Mi perfil de LinkedIn ↗
-                </a>
-
-            </div>
-
-        </section>
-
-        <!-- CV -->
-
-        <section id="cv" class="page">
-
-            <button class="home-button" data-page="inicio">
-                ← Home
-            </button>
-
-            <h1 class="section-heading">Currículum Vitae</h1>
-
-            <p class="section-description">
-                Consulta mi currículum profesional.
-            </p>
-
-            <button
-                class="certificate-card"
-                onclick="abrirDocumento('CV.pdf', 'Currículum Vitae')"
-            >
-                <span class="document-icon">📄</span>
-
-                <span class="certificate-name">
-                    Consultar mi CV
-                </span>
-
-                <span class="open-icon">↗</span>
-            </button>
-
-        </section>
-
-        <!-- CERTIFICADOS -->
-
-        <section id="certificados" class="page">
-
-            <button class="home-button" data-page="inicio">
-                ← Home
-            </button>
-
-            <h1 class="section-heading">Mis certificados</h1>
-
-            <p class="section-description">
-                Consulta los cursos y las acreditaciones que forman
-                parte de mi formación profesional.
-            </p>
-
-            <div class="certificate-list">
-
-                <button
-                    class="certificate-card"
-                    onclick="abrirDocumento(
-                        'certificados/certificado-1.pdf',
-                        'Nombre del primer curso'
-                    )"
-                >
-                    <span class="document-icon">📄</span>
-                    <span class="certificate-name">
-                        Nombre del primer curso
-                    </span>
-                    <span class="open-icon">↗</span>
-                </button>
-
-                <button
-                    class="certificate-card"
-                    onclick="abrirDocumento(
-                        'certificados/certificado-2.pdf',
-                        'Nombre del segundo curso'
-                    )"
-                >
-                    <span class="document-icon">📄</span>
-                    <span class="certificate-name">
-                        Nombre del segundo curso
-                    </span>
-                    <span class="open-icon">↗</span>
-                </button>
-
-                <button
-                    class="certificate-card"
-                    onclick="abrirDocumento(
-                        'certificados/certificado-3.pdf',
-                        'Nombre del tercer curso'
-                    )"
-                >
-                    <span class="document-icon">📄</span>
-                    <span class="certificate-name">
-                        Nombre del tercer curso
-                    </span>
-                    <span class="open-icon">↗</span>
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer>
-        Portfolio profesional
-    </footer>
-
-    <!-- VENTANA SUPERPUESTA -->
-
-    <div
-        class="modal"
-        id="document-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        aria-hidden="true"
-    >
-
-        <div class="modal-window">
-
-            <div class="modal-header">
-
-                <h2 class="modal-title" id="modal-title">
-                    Documento
-                </h2>
-
-                <div class="modal-actions">
-
-                    <a
-                        href="#"
-                        id="new-tab-link"
-                        class="new-tab-button"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Abrir en otra pestaña ↗
-                    </a>
-
-                    <button
-                        class="close-button"
-                        id="close-modal"
-                        aria-label="Cerrar documento"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-            </div>
-
-            <iframe
-                class="pdf-viewer"
-                id="pdf-viewer"
-                title="Vista previa del documento"
-            ></iframe>
-
-        </div>
-
-    </div>
-
-    <script>
-        // NAVEGACIÓN ENTRE APARTADOS
-
-        const paginas = document.querySelectorAll(".page");
-        const botonesMenu = document.querySelectorAll("[data-page]");
-
-        function mostrarPagina(nombre) {
-
-            paginas.forEach(function(pagina) {
-                pagina.classList.remove("active");
-            });
-
-            document.getElementById(nombre).classList.add("active");
-
-            botonesMenu.forEach(function(boton) {
-                boton.classList.toggle(
-                    "active",
-                    boton.dataset.page === nombre
-                );
-            });
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-        botonesMenu.forEach(function(boton) {
-            boton.addEventListener("click", function() {
-                mostrarPagina(boton.dataset.page);
-            });
-        });
-
-
-        // VENTANA PARA ABRIR LOS PDF
-
-        const modal = document.getElementById("document-modal");
-        const modalTitle = document.getElementById("modal-title");
-        const pdfViewer = document.getElementById("pdf-viewer");
-        const newTabLink = document.getElementById("new-tab-link");
-        const closeModalButton = document.getElementById("close-modal");
-
-        let elementoAnterior = null;
-
-        function abrirDocumento(ruta, titulo) {
-
-            elementoAnterior = document.activeElement;
-
-            modalTitle.textContent = titulo;
-            newTabLink.href = ruta;
-            pdfViewer.src = ruta;
-
-            modal.classList.add("visible");
-            modal.setAttribute("aria-hidden", "false");
-
-            document.body.style.overflow = "hidden";
-
-            closeModalButton.focus();
-        }
-
-        function cerrarDocumento() {
-
-            modal.classList.remove("visible");
-            modal.setAttribute("aria-hidden", "true");
-
-            pdfViewer.src = "about:blank";
-
-            document.body.style.overflow = "";
-
-            if (elementoAnterior) {
-                elementoAnterior.focus();
-            }
-        }
-
-        closeModalButton.addEventListener(
-            "click",
-            cerrarDocumento
-        );
-
-        modal.addEventListener("click", function(evento) {
-            if (evento.target === modal) {
-                cerrarDocumento();
-            }
-        });
-
-        document.addEventListener("keydown", function(evento) {
-            if (
-                evento.key === "Escape" &&
-                modal.classList.contains("visible")
-            ) {
-                cerrarDocumento();
-            }
-        });
-    </script>
-
-</body>
-</html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Julio Camacho | Técnico Superior en Química Industrial</title>
+
+  <meta name="description" content="Página profesional de Julio Camacho, Técnico Superior en Química Industrial. Consulta mi currículum y certificados.">
+
+  <style>
+    :root {
+      --azul: #102b46;
+      --azul-medio: #1d4e78;
+      --azul-claro: #eaf2f8;
+      --blanco: #ffffff;
+      --fondo: #f3f6f9;
+      --texto: #263746;
+      --gris: #647586;
+      --borde: #dce5ec;
+      --sombra: 0 8px 25px rgba(16, 43, 70, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* CABECERA Y NAVEGACIÓN */
+
+    header {
+      background: var(--azul);
+      color: var(--blanco);
+      padding: 22px 20px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-button {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: white;
+      background: transparent;
+      padding: 9px 18px;
+      border-radius: 7px;
+      transition: 0.2s;
+    }
+
+    .nav-button:hover,
+    .nav-button.active {
+      background: white;
+      color: var(--azul);
+    }
+
+    /* CONTENIDO GENERAL */
+
+    main {
+      max-width: 1000px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .page {
+      display: none;
+      animation: aparecer 0.25s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 35px;
+      box-shadow: var(--sombra);
+      margin-bottom: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--azul);
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: clamp(27px, 4vw, 36px);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--azul-medio);
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .muted {
+      color: var(--gris);
+    }
+
+    /* PÁGINA PRINCIPAL */
+
+    .hero {
+      text-align: center;
+      padding-top: 42px;
+      padding-bottom: 42px;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      border: 5px solid white;
+      outline: 3px solid var(--azul-medio);
+      box-shadow: var(--sombra);
+      margin-bottom: 24px;
+      background: var(--azul-claro);
+    }
+
+    .hero .subtitle {
+      margin-top: 8px;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 0 auto 24px;
+      color: var(--gris);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .about-text {
+      max-width: 760px;
+      margin: auto;
+    }
+
+    /* BOTONES */
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border: 1px solid var(--azul);
+      border-radius: 8px;
+      background: var(--azul);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: var(--azul-medio);
+      border-color: var(--azul-medio);
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      background: white;
+      color: var(--azul);
+    }
+
+    .button.secondary:hover {
+      background: var(--azul-claro);
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .back-button {
+      margin-bottom: 20px;
+    }
+
+    /* TARJETAS DE DOCUMENTOS */
+
+    .document-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .document-card {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(16, 43, 70, 0.05);
+      transition: 0.2s;
+    }
+
+    .document-card:hover {
+      transform: translateY
