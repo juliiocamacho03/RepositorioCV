@@ -51,7 +51,7 @@
   .visor-cuerpo iframe { display:block; width:100%; height:76vh; border:0; }
   .chip { position:absolute; top:12px; right:12px; padding:6px 14px; border-radius:999px; background:var(--ink); color:#fff; font-size:.85rem; font-weight:600; text-decoration:none; }
   .chip:hover { background:var(--accent); }
-
+.visor-cuerpo img.redonda { width:min(360px,80vw); height:min(360px,80vw); object-fit:cover; border-radius:50%; margin:28px auto; max-height:none; }
   /* Pie */
   footer { padding:20px; text-align:center; border-top:1px solid var(--line); }
   .linkedin { display:inline-block; padding:9px 26px; border-radius:999px; background:var(--linkedin); color:#fff; font-weight:600; text-decoration:none; }
@@ -141,6 +141,7 @@
     el.src = c.archivo;
     if (esPdf) el.title = c.nombre; else el.alt = c.nombre;
     contenido.replaceChildren(el);
+    el.classList.toggle("redonda", c.redonda === true);
     document.getElementById("visor-titulo").textContent = c.nombre;
     document.getElementById("abrir-externo").href = c.archivo;
     fondo.hidden = false;
@@ -169,7 +170,7 @@
   vista();}
   const fotoPerfil = document.querySelector(".foto");
 fotoPerfil.addEventListener("click", () => {
-  abrir({ nombre: "Julio Camacho", archivo: fotoPerfil.getAttribute("src"), sinEnlace: true });
+  abrir({ nombre: "Julio Camacho", archivo: fotoPerfil.getAttribute("src"), sinEnlace: true, redonda:true });
 });
 </script>
 </body>
