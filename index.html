@@ -75,7 +75,7 @@
   <section class="inicio" id="inicio">
     <img class="foto" src="foto.jpg" alt="Foto de Tu Nombre">
     <h1>Tu Nombre</h1>
-    <p> Tecnico Superior en Quimica Industrial, responsable, trabajador y con ganas de seguir apendiendo y creciendo en una profesionalmente. Me adapto con facilidad al trabajo en equipo y afronto nuevos retoscon compromiso, iniciativa y motivación.</p>
+    <p> Tecnico Superior en Quimica Industrial, responsable, trabajador y con ganas de seguir apendiendo y creciendo profesionalmente. Me adapto con facilidad al trabajo en equipo y afronto nuevos retos con compromiso, iniciativa y motivación.</p>
   </section>
 
   <section class="certs" id="certs" hidden>
@@ -168,6 +168,10 @@
     document.getElementById("tab-certs").href = enCerts ? "#" : "#certificados";
   addEventListener("hashchange", vista);
   vista();
+  const fotoPerfil = document.querySelector(".foto");
+fotoPerfil.addEventListener("click", () => {
+  abrir({ nombre: "Julio Camacho", archivo: fotoPerfil.getAttribute("src"), sinEnlace: true });
+});
 </script>
 </body>
 </html>
